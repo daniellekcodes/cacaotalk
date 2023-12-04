@@ -1,0 +1,128 @@
+///////SIGN UP////////
+
+HTML
+CREATE a page with a FORM
+    - FORM will accept 4 inputs
+         username: name, id, placeholder, required
+         email : name, id, placeholder, required
+         password : name, id, placeholder, required
+        password confirm : name, id, placeholder, required
+         sign up button: addAccount.php
+    
+
+
+
+addAccount.php
+
+ VALIDATION
+$username = $_REQUEST['username']
+$email = $_REQUEST['email']
+...
+
+
+$usernameValid = false;
+if (preg_match("/^[a-z0-9_\-]{2,30}$/i", $username )) {
+    $usernameValid = true;
+
+} else {
+    echo "invalid";
+}
+
+
+$email
+if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $emailValid = true
+
+} else {
+  echo "Invalid email format";
+}
+
+
+$password
+if (preg_match("/^[a-z0-9!@#$%\^&*]{6,30}$/i")) {
+    $passwordValid = true;
+} else {
+      echo "Invalid password format";
+
+}
+
+$passwordConfirm
+if ($passwordConfirm === $password) {
+    $passwordConfirmValid = true;
+} else {
+    echo "password does not match";
+
+}
+
+//////////////////////////////////////////
+INSERT 
+
+if ($usernameValid and $emailValid and $passwordValid and $passwordConfirmValid){
+
+    $db = LINK cacaotalk db
+    $req = $db->prepare("INSERT INTO accounts (username, email, password) VALUES (:username, :email, :password ) " );
+    $req->execute([
+        'username' => username
+        .......
+
+    ])
+} header("Location: signIn.php")
+
+
+
+
+////////////////////////////////////////
+DATABASE - accounts table
+id : int AI
+username : varchar 30
+email : varchar 255
+password: varchar 30
+date_created: datetime currenttimestamp
+
+
+
+
+
+///////////////////////////////////////
+SIGNIN.php
+HTML 
+1.  CREATE A FORM with 2 inputs
+        username 
+        password
+        sign in button : checkSignIn.php
+
+
+checkSignIn.php
+VERIFICATIONS
+
+ 1. $username = $_POST['username']
+    $password = $_POST['password];
+
+2. CONNECT to cacaotalk db
+
+    $req = $db->prepare("SELECT id, username, password FROM accounts WHERE username = :username");
+    $req->execute([
+        'username' => username;
+
+    ]);
+
+   $account = $req->fetch(PDO::FETCH_OBJ)
+
+   if ($account AND password_verify($password, $account->password)){
+
+        session_start();
+        $_SESSION['userid'] = $account->id
+        $_SESSION['username'] =$account->username
+
+    REDIRECT header(LOCATION: cacaotalk);
+   }  
+   
+   
+
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+HOME
+1. User can write message and set username in a message form:
+    - input, placeholders, send button(a href="insertMessage.php")
+    -When SEND button is pressed message and username is submitted to database
+    
+
+2. User can see new message in chatbox
+    - 
+3. User can scroll
+
+
+UI 
+1. User is blue, positioned left
+2. Friend is green, positioned right
+
+
+DATABASE 
+1. Columns: id, username, msg, date_created (default CURRENTTIMESTAMP)
+
+
+PHP
+1. insertMessage.php
+    - getting the input from the message form ( $GET_POST['msg'];)
+    - getting the input from the username section of the message form
+    - do SQL prepared execute to add user's msg and user's username to our database msg and username (nominative marker)
+    - redirect back to home
+
+2.
+

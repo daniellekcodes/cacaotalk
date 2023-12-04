@@ -1,0 +1,42 @@
+Home.php
+1. Create a chat section
+    - Connect to cacaotalk db, 
+    - Create a WHILE loop to FETCH
+        include displayMessage.php
+
+
+
+2. Create a message section
+    - Create form: action = "insertMessage.php", method = POST
+        1. input = text, id = username, name = username, placeholder = username
+
+        2. input = text, id = msg, name = msg, placeholder = message
+        3. button type = submit to go to insertMessage.php page
+
+
+
+3. insertMessage.php
+    - Validation
+    if !empty(username) and !empty(msg): 
+       1. connect to db
+       2. $req->prepare("INSERT INTO messages (username, msg) VALUES (:username, :msg) ");
+       3. $req->execute([
+            "username" => $username,
+            "msg" => $msg
+       ]);
+
+    - redirect 
+        $newMsg = $db->lastInsert();
+        header("Location: home.php?newMsgAdded=$newMsg");
+
+
+
+5. messageDisplay.php
+    .mainuser (LEFT)
+    <div><?= $cacao->username ?></div>
+    <p><?= $cacao->msg ?></p>
+
+    .subuser (RIGHT)
+    <div><?= $cacao->username ?></div>
+    <p><?= $cacao->msg ?></p>
+
